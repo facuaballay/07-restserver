@@ -1,11 +1,17 @@
 const express = require('express');
+
 const app = express();
+
 const Usuario=require('../models/usuario');
+
 const bcrypt = require('bcryptjs');
+
 const _ = require('underscore');
 
+const { verificaToken,verificAdminrole } = require('../middlewares/autenticacion')
 
-app.get('/usuario', function (req, res) {
+
+app.get('/usuario',verificaToken, (req, res) => {
 
   let desde = req.query.desde || 0;
 
@@ -41,8 +47,11 @@ Usuario.find({estado:true},'nombre email estado role google img')
 
 
   });
-  app.post('/usuario', function (req, res) {
+  app.post('/usuario',[verificaToken,verificAdminrole] , (req, res)=> {
       
+  
+
+
       let body = req.body;
        let usuario = new Usuario({
          nombre:body.nombre,
@@ -72,7 +81,7 @@ Usuario.find({estado:true},'nombre email estado role google img')
       
     
     });
-    app.put('/usuario/:id', function (req, res) {
+    app.put('/usuario/:id',[verificaToken,verificAdminrole], (req, res) => {
      
      let id = req.params.id;
      let body=_.pick(req.body,[ 'nombre','email','img','role','estado']);
@@ -95,7 +104,7 @@ Usuario.find({estado:true},'nombre email estado role google img')
      })
      
     });
-    app.delete('/usuario/:id', function (req, res) {
+    app.delete('/usuario/:id', [verificaToken,verificAdminrole] ,(req, res) => {
       
     let id = req.params.id;
   //  let body = _.pick(req.body,['estado'])
