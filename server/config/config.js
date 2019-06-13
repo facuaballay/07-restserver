@@ -23,21 +23,11 @@ process.env.SEED = process.env.SEED || 'este-es-el-seed-desarollo';
 //=====================
 //Base de datos
 //=====================
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> variable de entorno mongo
  if (process.env.NODE_ENV === 'dev'){
     urldb='mongodb://localhost:27017/cafe'
  }else{
      urldb=process.env.MONGO_URI;
  }
-<<<<<<< HEAD
-=======
->>>>>>> Update config.js
-=======
->>>>>>> variable de entorno mongo
 
 
 process.env.urldb=urldb;
@@ -50,4 +40,10 @@ process.env.urldb=urldb;
 //24 horas
 //30 dias
 process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
+
+//=====================
+//Google client ID
+//=====================
+
+process.env.CLIENT_ID = process.env.CLIENT_ID || '22322636000-g640htpg2l8q3qotfmngf12t4pj3eo3t.apps.googleusercontent.com';
 
