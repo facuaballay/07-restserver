@@ -38,7 +38,7 @@ let verificAdminrole = (req,res,next) =>{
         next()
     }else {
         
-        res.json({
+     return  res.json({
             ok:false,
             err:{
                 message:'El usuario no es administrador'
